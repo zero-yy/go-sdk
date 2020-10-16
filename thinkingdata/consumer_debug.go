@@ -54,6 +54,9 @@ func (c *DebugConsumer) send(data string) error {
 	if !c.writeData {
 		dryRun = "1"
 	}
+	fmt.Printf("TGA url:[%s] data:[%+v]", c.serverUrl,
+		url.Values{"data": {data}, "appid": {c.appId}, "source": {"server"}, "dryRun": {dryRun}})
+
 	resp, err := http.PostForm(c.serverUrl, url.Values{"data": {data}, "appid": {c.appId}, "source": {"server"}, "dryRun": {dryRun}})
 	if err != nil {
 		return err
